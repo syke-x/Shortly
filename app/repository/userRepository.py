@@ -35,3 +35,11 @@ class UserRepository :
 
         return User(**rows[0]) if rows else None 
     
+    def find_by_email (self , email : str) -> User | None :
+
+        rows = self._conn.execute_query(
+            "SELECT * FROM users WHERE email = ?" , (str(email) , )
+        )
+
+        return User(**rows[0]) if rows else None 
+    
