@@ -27,4 +27,11 @@ class UserRepository :
             """
         )
 
+    def find_by_id(self , user_id : int ) -> User | None : 
+
+        rows = self._conn.execute_query(
+            "SELECT * FROM users WHERE user_id = ?" , (str(user_id) , )
+        )
+
+        return User(**rows[0]) if rows else None 
     
