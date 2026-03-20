@@ -13,7 +13,7 @@ class UserRepository :
         return cls._instance
     
 
-    def _create_table():
+    def _create_table(self) -> None:
 
         self._conn.execute_query(
             """
@@ -26,4 +26,5 @@ class UserRepository :
             )
             """
         )
-        
+
+    
