@@ -37,10 +37,11 @@ class UserService:
     
     def login_user(self , email : str , password : str) -> User:
 
-        user = _user_repo.find_by_email(email)
+        user = self._user_repo.find_by_email(email)
 
         if user is None:
             raise ValueError("user with this email doesn't exsist")
         
         return user 
-
+    
+    
