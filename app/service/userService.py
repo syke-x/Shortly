@@ -47,6 +47,16 @@ class UserService:
     def get_user(self , user_id : int) -> User | None :
 
         return self._user_repo.find_by_id(user_id)
+    
+    def delete_user(self , user_id:int) -> None :
+
+        user = self.get_user(user_id)
+
+        if user is None :
+            raise ValueError("User is not present")
+        
+        self._user_repo.delete(user_id)
+        
         
         
     
