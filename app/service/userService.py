@@ -34,3 +34,13 @@ class UserService:
 
         self._user_repo.save(user)
         return user 
+    
+    def login_user(self , email : str , password : str) -> User:
+
+        user = _user_repo.find_by_email(email)
+
+        if user is None:
+            raise ValueError("user with this email doesn't exsist")
+        
+        return user 
+
