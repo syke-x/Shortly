@@ -17,7 +17,7 @@ class UserService:
     def create_user(self , name : str , email :str , password : str) -> User:
 
         # check if the email is already present 
-        exisiting = _user_repo.find_by_email(email)
+        exisiting = self._user_repo.find_by_email(email)
 
         if exisiting:
             raise ValueError("Email is already present")
