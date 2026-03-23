@@ -56,6 +56,25 @@ class UserService:
             raise ValueError("User is not present")
         
         self._user_repo.delete(user_id)
+
+    def update_user(self , user_id : int ,name : str = None , email : str = None , password : str = None):
+
+        user = self.get_user(user_id)
+
+        if user is None :
+            raise ValueError("User is not present")
+        
+        if email : 
+            user.email = email 
+
+        if name : 
+            user.name = name 
+        
+        if password : 
+            user.hash_password = AuthService.hash_password(password)
+
+        self._get_repo.save(user)
+        return user
         
         
         
