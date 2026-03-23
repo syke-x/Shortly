@@ -48,5 +48,9 @@ class UserRepository :
             "INSERT OR REPLACE INTO users VALUES (?,?,?,?,?)",
             (str(user.user_id) , user.name , user.email , user.hash_password , str(user.created_at))
         )
-        
+
+    def delete(self , user_id : int ):
+        self._conn.execute_query(
+            "DELETE FROM users WHERE user_id = ?" , (str(user_id),)
+        )
     
