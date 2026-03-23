@@ -43,3 +43,10 @@ class UserRepository :
 
         return User(**rows[0]) if rows else None 
     
+    def save(self , user : User) :
+        self._conn.execute_query(
+            "INSERT OR REPLACE INTO users VALUES (?,?,?,?,?)",
+            (str(user.user_id) , user.name , user.email , user.hash_password , str(user.created_at))
+        )
+        
+    
