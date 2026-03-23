@@ -44,4 +44,13 @@ class UserService:
         
         return user 
     
+    def get_user(self , user_id : int) -> User:
+
+        user = self._user_repo.find_by_id(user_id)
+
+        if user is None:
+            raise ValueError("user is not present")
+        
+        return user 
+    
     
