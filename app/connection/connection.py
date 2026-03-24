@@ -15,3 +15,11 @@ class Connection(ABC):
         pass 
 
 
+class SQLiteConnection(Connection) : 
+
+    def __init__(self , db_path : str):
+
+        self.db_path = db_path
+
+    
+        
