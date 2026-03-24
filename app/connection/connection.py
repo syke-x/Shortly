@@ -3,11 +3,11 @@ import sqlite3
 class Connection(ABC):
 
     @abstractmethod
-    def start_connection(self , db_path ):
+    def start_connection(self  ):
         pass
 
     @abstractmethod
-    def disconnect(self , db_path):
+    def disconnect(self ):
         pass
 
     @abstractmethod
@@ -26,6 +26,11 @@ class SQLiteConnection(Connection) :
         
         self.conn = sqlite3.connect(self.db_path)
         return self.conn
+    
+    def disconnect(self):
+        if self.conn : 
+            self.conn.close()
+            self.conn = None 
     
     
     
