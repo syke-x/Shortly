@@ -1,5 +1,5 @@
 from abc import ABC , abstractmethod
-from sqlite3 import connect 
+import sqlite3 
 class Connection(ABC):
 
     @abstractmethod
@@ -20,10 +20,14 @@ class SQLiteConnection(Connection) :
     def __init__(self , db_path : str):
 
         self.db_path = db_path
+        self.conn = None
 
-    def start_connection(self, db_path):
+    def start_connection(self):
         
-        return connect(self.db_path)
-
+        self.conn = sqlite3.connect(self.db_path)
+        return self.conn
+    
+    
+    
     
         
