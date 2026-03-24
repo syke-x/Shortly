@@ -11,7 +11,7 @@ class Connection(ABC):
         pass
 
     @abstractmethod
-    def execute_query(self , query : str) : 
+    def execute_query(self , query : str , params : tuple = ()) : 
         pass 
 
 
@@ -22,16 +22,26 @@ class SQLiteConnection(Connection) :
         self.db_path = db_path
         self.conn = None
 
-    def start_connection(self):
+    def start_connection(self) -> None:
         
         self.conn = sqlite3.connect(self.db_path)
-        return self.conn
+        self.conn.row_factory = sqlite3.Row
     
     def disconnect(self):
         if self.conn : 
             self.conn.close()
             self.conn = None 
     
+    def execute_query(self, query , params : tuple = ()):
+
+        if self.conn is None :
+            self.start_connection
+        
+        cursor = self.conn.execute(query , params)
+        self.conn.commit()
+        return [dict(row) for row in cursor.fetchall()]
+
+
     
     
     
